@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="../style.tw.css" />
     <title>Start</title>
   </head>
-  <body class="flex flex-col w-full h-screen">
-    <nav class="flex flex-row items-center p-3">
+  <body class="flex flex-col w-full h-screen font-iransans">
+    <nav class="flex flex-row items-center p-3 shadow-md">
       <!-- undo redo -->
       <div class="flex flex-row gap-2">
         <button class="p-2">
@@ -18,18 +18,154 @@
           <img src="../assets/redo.svg" alt="redo" />
         </button>
       </div>
-      <div class="flex-grow w-0 mx-auto text-center">نام صفحه</div>
-      <div class="flex flex-row gap-2 px-3">
+      <!-- page name -->
+      <div class="flex-grow w-0 mx-auto text-center text-blue-600">
+        نام صفحه
+      </div>
+      <!-- nav icons -->
+      <div class="flex flex-row gap-6 px-3">
         <img src="../assets/upload.svg" alt="upload" />
         <img src="../assets/eye.svg" alt="eye" />
         <img src="../assets/home.svg" alt="home" />
         <img src="../assets/logo.svg" alt="logo" />
       </div>
     </nav>
-    <main class="flex flex-row">
-      <div class="flex flex-col w-\[300px]">
-        <div class="flex flex-col items-center h-full">
-          <div class="mb-2">تنظیمات صفحه</div>
+    <main class="flex flex-row w-full h-full">
+      <!-- left section -->
+      <div class="flex flex-col w-[300px] p-6 rtl shadow-lg">
+        <!-- section of options -->
+        <div class="flex flex-col h-full gap-4">
+          <div class="mb-2 font-bold">تنظیمات صفحه</div>
+          <!-- option -->
+          <div class="flex flex-row justify-between">
+            <span class="flex items-center">فاصله بین فریم ها</span>
+            <select class="p-1 pl-3 border border-gray-200 rounded-md">
+              <option value="1">پیش فرض</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+          <!--option-->
+          <div class="flex flex-row justify-between">
+            <span class="flex items-center">حاشیه</span>
+            <input
+              class="w-8 p-1 text-center border border-gray-200 rounded-md ltr"
+              type="text"
+              placeholder="12"
+            />
+          </div>
+          <!--option-->
+          <div class="flex flex-row justify-between">
+            <span class="flex items-center">فاصله از دیواره</span>
+            <input
+              class="w-8 p-1 text-center border border-gray-200 rounded-md ltr"
+              type="text"
+              placeholder="24"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- mid section -->
+      <div
+        class="relative flex flex-col items-center justify-center flex-grow bg-lightpressed"
+      >
+        <div class="flex flex-row gap-4 h-[70%]">
+          <!-- toolbox -->
+          <div class="flex flex-col gap-2">
+            <button
+              class="flex items-center justify-center rounded-md bg-[#ffffff1a]"
+            >
+              <img src="../assets/pencil.svg" />
+            </button>
+            <button
+              class="flex items-center justify-center rounded-md bg-[#ffffff1a]"
+            >
+              <img src="../assets/arrowup.svg" />
+            </button>
+            <button
+              class="flex items-center justify-center rounded-md bg-[#ffffff1a]"
+            >
+              <img src="../assets/arrowdown.svg" />
+            </button>
+            <button
+              class="flex items-center justify-center rounded-md bg-[#ffffff1a]"
+            >
+              <img src="../assets/lock.svg" />
+            </button>
+            <button
+              class="flex items-center justify-center rounded-md bg-[#ffffff1a]"
+            >
+              <img src="../assets/bin.svg" />
+            </button>
+          </div>
+          <div class="flex flex-col gap-3">
+            <!-- canvas -->
+            <div
+              class="h-[800px] w-[360px] flex flex-col px-4 py-8 gap-4 bg-white"
+            >
+              <div
+                class="flex flex-col items-center w-full h-24 gap-4 py-2 font-bold border border-blue-500 border-dashed rounded-lg"
+              >
+                <img
+                  src="../assets/plus.svg"
+                  class="p-2 rounded-lg bg-slate-200"
+                />
+                <span class="text-sm text-blue-500"
+                  >یک قالب را بکشید و رها کنید</span
+                >
+              </div>
+            </div>
+            <!-- add page button -->
+            <button
+              class="border font-bold border-white bg-[#ffffff60] text-blue-600 p-2 w-full rounded-lg"
+            >
+              افزودن صفحه
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- right section -->
+      <div class="flex flex-col w-[150px] p-2 rtl shadow-lg">
+        <!-- section of options -->
+        <div class="flex flex-col h-full gap-2">
+          <div class="mb-2 font-bold">قالب ها</div>
+          <!--options-->
+          <button
+            class="w-full p-2 text-center border border-gray-200 rounded-md"
+          >
+            کارت
+          </button>
+          <button
+            class="w-full p-2 text-center border border-gray-200 rounded-md"
+          >
+            دکمه ها
+          </button>
+          <button
+            class="w-full p-2 text-center border border-gray-200 rounded-md"
+          >
+            متن
+          </button>
+          <button
+            class="w-full p-2 text-center border border-gray-200 rounded-md"
+          >
+            عکس
+          </button>
+          <button
+            class="w-full p-2 text-center border border-gray-200 rounded-md"
+          >
+            ویدئو
+          </button>
+          <button
+            class="w-full p-2 text-center border border-gray-200 rounded-md"
+          >
+            اسلایدر
+          </button>
+          <button
+            class="w-full p-2 text-center border border-gray-200 rounded-md"
+          >
+            آیکون
+          </button>
         </div>
       </div>
     </main>

@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'IRANSans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/IRANSans.ttf');
+}
+@layer utilities {
+  .rtl {
+    direction: rtl;
+  }
+  .ltr {
+    direction: ltr;
+  }
+}
