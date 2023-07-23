@@ -2,7 +2,11 @@
 module.exports = {
   content: ['./src/*.html', './src/**/*.html'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        vazirmatn: ['vazirmatn'],
+      },
+    },
   },
   plugins: [],
 }
