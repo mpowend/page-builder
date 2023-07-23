@@ -6,13 +6,13 @@
   font-family: 'IRANSans';
   font-style: normal;
   font-weight: 400;
-  src: url('./assets/IRANSans.ttf');
+  src: url('./assets/fonts/IRANSans.ttf');
 }
 @font-face {
   font-family: 'vazir';
   font-style: normal;
   font-weight: 400;
-  src: url('./assets/Vazir-Regular.ttf');
+  src: url('./assets/fonts/Vazir-Regular.ttf');
 }
 @layer utilities {
   .rtl {
