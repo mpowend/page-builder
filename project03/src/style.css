@@ -8,11 +8,28 @@
   font-weight: 400;
   src: url('./assets/IRANSans.ttf');
 }
+@font-face {
+  font-family: 'vazir';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/Vazir-Regular.ttf');
+}
 @layer utilities {
   .rtl {
     direction: rtl;
   }
   .ltr {
     direction: ltr;
+  }
+}
+@layer components {
+  .template-type {
+    @apply w-full p-2 text-center border border-gray-200 rounded-md;
+  }
+  .canvas-button {
+    @apply flex items-center justify-center rounded-md bg-[#ffffff1a];
+  }
+  .page-options-option {
+    @apply flex flex-row justify-between transition-all;
   }
 }

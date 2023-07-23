@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../style.tw.css" />
+    <script src="./script.js" defer></script>
     <title>Start</title>
   </head>
-  <body class="flex flex-col w-full h-screen font-iransans">
+  <body class="flex flex-col w-full h-screen font-vazir">
     <nav class="flex flex-row items-center p-3 shadow-md">
       <!-- undo redo -->
       <div class="flex flex-row gap-2">
@@ -30,14 +31,24 @@
         <img src="../assets/logo.svg" alt="logo" />
       </div>
     </nav>
-    <main class="flex flex-row w-full h-full">
+    <main class="flex flex-row w-full h-full max-md:flex-col">
+      <!-- arrow -->
+      <div
+        id="arrow"
+        class="flex flex-row justify-center hidden w-full max-md:block"
+      >
+        <button class="w-full bg-yellow-100 rounded-md">▼</button>
+      </div>
       <!-- left section -->
-      <div class="flex flex-col w-[300px] p-6 rtl shadow-lg">
+      <div
+        id="left"
+        class="flex flex-col w-[300px] max-md:w-full max-md:order-2 md:block p-6 rtl shadow-lg"
+      >
         <!-- section of options -->
         <div class="flex flex-col h-full gap-4">
           <div class="mb-2 font-bold">تنظیمات صفحه</div>
           <!-- option -->
-          <div class="flex flex-row justify-between">
+          <div class="page-options-option">
             <span class="flex items-center">فاصله بین فریم ها</span>
             <select class="p-1 pl-3 border border-gray-200 rounded-md">
               <option value="1">پیش فرض</option>
@@ -47,7 +58,7 @@
             </select>
           </div>
           <!--option-->
-          <div class="flex flex-row justify-between">
+          <div class="page-options-option">
             <span class="flex items-center">حاشیه</span>
             <input
               class="w-8 p-1 text-center border border-gray-200 rounded-md ltr"
@@ -56,7 +67,7 @@
             />
           </div>
           <!--option-->
-          <div class="flex flex-row justify-between">
+          <div class="page-options-option">
             <span class="flex items-center">فاصله از دیواره</span>
             <input
               class="w-8 p-1 text-center border border-gray-200 rounded-md ltr"
@@ -68,34 +79,24 @@
       </div>
       <!-- mid section -->
       <div
-        class="relative flex flex-col items-center justify-center flex-grow bg-lightpressed"
+        class="relative flex flex-col items-center justify-center flex-grow max-md:order-3 bg-lightpressed"
       >
         <div class="flex flex-row gap-4 h-[70%]">
           <!-- toolbox -->
           <div class="flex flex-col gap-2">
-            <button
-              class="flex items-center justify-center rounded-md bg-[#ffffff1a]"
-            >
+            <button class="canvas-button">
               <img src="../assets/pencil.svg" />
             </button>
-            <button
-              class="flex items-center justify-center rounded-md bg-[#ffffff1a]"
-            >
+            <button class="canvas-button">
               <img src="../assets/arrowup.svg" />
             </button>
-            <button
-              class="flex items-center justify-center rounded-md bg-[#ffffff1a]"
-            >
+            <button class="canvas-button">
               <img src="../assets/arrowdown.svg" />
             </button>
-            <button
-              class="flex items-center justify-center rounded-md bg-[#ffffff1a]"
-            >
+            <button class="canvas-button">
               <img src="../assets/lock.svg" />
             </button>
-            <button
-              class="flex items-center justify-center rounded-md bg-[#ffffff1a]"
-            >
+            <button class="canvas-button">
               <img src="../assets/bin.svg" />
             </button>
           </div>
@@ -126,46 +127,21 @@
         </div>
       </div>
       <!-- right section -->
-      <div class="flex flex-col w-[150px] p-2 rtl shadow-lg">
+      <div
+        id="right"
+        class="flex flex-col w-[150px] md:block max-md:order-1 max-md:w-full p-2 rtl shadow-lg max-md:shadow-none"
+      >
         <!-- section of options -->
         <div class="flex flex-col h-full gap-2">
           <div class="mb-2 font-bold">قالب ها</div>
           <!--options-->
-          <button
-            class="w-full p-2 text-center border border-gray-200 rounded-md"
-          >
-            کارت
-          </button>
-          <button
-            class="w-full p-2 text-center border border-gray-200 rounded-md"
-          >
-            دکمه ها
-          </button>
-          <button
-            class="w-full p-2 text-center border border-gray-200 rounded-md"
-          >
-            متن
-          </button>
-          <button
-            class="w-full p-2 text-center border border-gray-200 rounded-md"
-          >
-            عکس
-          </button>
-          <button
-            class="w-full p-2 text-center border border-gray-200 rounded-md"
-          >
-            ویدئو
-          </button>
-          <button
-            class="w-full p-2 text-center border border-gray-200 rounded-md"
-          >
-            اسلایدر
-          </button>
-          <button
-            class="w-full p-2 text-center border border-gray-200 rounded-md"
-          >
-            آیکون
-          </button>
+          <button class="template-type">کارت</button>
+          <button class="template-type">دکمه ها</button>
+          <button class="template-type">متن</button>
+          <button class="template-type">عکس</button>
+          <button class="template-type">ویدئو</button>
+          <button class="template-type">اسلایدر</button>
+          <button class="template-type">آیکون</button>
         </div>
       </div>
     </main>
