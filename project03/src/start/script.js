@@ -10,13 +10,13 @@ const hideElement = element => {
 }
 const openAccardion = element => {
   showElement(element)
-  overlay.classList.add('animate-slideIn')
-  overlay.classList.remove('animate-slideOut')
+  overlay.classList.add('max-md:animate-slideIn')
+  overlay.classList.remove('max-md:animate-slideOut')
   accardionOpen = true
 }
 const closeAcardion = () => {
-  overlay.classList.add('animate-slideOut')
-  overlay.classList.remove('animate-slide')
+  overlay.classList.add('max-md:animate-slideOut')
+  overlay.classList.remove('max-md:animate-slide')
   const hider = () => {
     hideElement(setting)
     hideElement(templates)
