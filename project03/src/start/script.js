@@ -1,27 +1,31 @@
 let accardionOpen = false
+const ele = document.getElementById('overlay')
+const openAccardion = () => {
+  ele.classList.add('animate-slideIn')
+  ele.classList.remove('animate-slideOut')
+  accardionOpen = true
+}
+const closeAcardion = () => {
+  ele.classList.add('animate-slideOut')
+  ele.classList.remove('animate-slide')
+  accardionOpen = false
+}
 document.getElementById('arrow').addEventListener('click', () => {
-  const [, bot, , top] = Array.from(
-    document.getElementById('arrow').parentElement.children
-  )
-  const animateBot = () => {
-    top.removeEventListener('animationend', animateBot)
-    bot.classList.add('animate-slideBot')
-    bot.classList.remove('animate-slideBotOut')
-  }
-  const animateTopOut = () => {
-    bot.removeEventListener('animationend', animateTopOut)
-    top.classList.add('animate-slideTopOut')
-    top.classList.remove('animate-slideTop')
-  }
   if (!accardionOpen) {
-    top.classList.add('animate-slideTop')
-    top.classList.remove('animate-slideTopOut')
-    top.addEventListener('animationend', animateBot)
-    accardionOpen = true
+    openAccardion()
   } else {
-    bot.classList.add('animate-slideBotOut')
-    bot.classList.remove('animate-slideBot')
-    bot.addEventListener('animationend', animateTopOut)
-    accardionOpen = false
+    closeAcardion()
   }
 })
+Array.from(document.getElementsByClassName('template-type')).forEach(
+  element => {
+    element.addEventListener('click', () => {
+      closeAcardion()
+      const clone = document
+        .getElementById('button-template')
+        .content.cloneNode(true)
+
+      document.getElementById('main-layout').prepend(clone)
+    })
+  }
+)

@@ -13,34 +13,24 @@ module.exports = {
       keyframes: {
         slideIn: {
           '0%': {
-            'max-height': 0,
+            transform: 'translateY(100%)',
           },
           '100%': {
-            'max-height': '400px',
+            transform: 'translateY(0)',
           },
         },
         slideOut: {
           '0%': {
-            'max-height': '400px',
+            transform: 'translateY(0)',
           },
           '100%': {
-            'max-height': 0,
-          },
-        },
-        slideOutmin: {
-          '0%': {
-            'max-height': '200px',
-          },
-          '100%': {
-            'max-height': 0,
+            transform: 'translateY(100%)',
           },
         },
       },
       animation: {
-        slideTop: 'slideIn 1s ease-in forwards',
-        slideBot: 'slideIn 1s ease-out forwards',
-        slideTopOut: 'slideOut 1s ease-out forwards',
-        slideBotOut: 'slideOutmin 0.5s ease-in forwards',
+        slideIn: 'slideIn 1s ease-in-out forwards',
+        slideOut: 'slideOut 1s ease-in-out forwards',
       },
     },
   },
