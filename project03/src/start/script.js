@@ -1,18 +1,33 @@
 let accardionOpen = false
-const ele = document.getElementById('overlay')
-const openAccardion = () => {
-  ele.classList.add('animate-slideIn')
-  ele.classList.remove('animate-slideOut')
+const overlay = document.getElementById('overlay')
+const setting = document.getElementById('left')
+const templates = document.getElementById('right')
+const showElement = element => {
+  element.classList.remove('max-md:hidden')
+}
+const hideElement = element => {
+  element.classList.add('max-md:hidden')
+}
+const openAccardion = element => {
+  showElement(element)
+  overlay.classList.add('animate-slideIn')
+  overlay.classList.remove('animate-slideOut')
   accardionOpen = true
 }
 const closeAcardion = () => {
-  ele.classList.add('animate-slideOut')
-  ele.classList.remove('animate-slide')
+  overlay.classList.add('animate-slideOut')
+  overlay.classList.remove('animate-slide')
+  const hider = () => {
+    hideElement(setting)
+    hideElement(templates)
+    overlay.removeEventListener('animationend', hider)
+  }
+  overlay.addEventListener('animationend', hider)
   accardionOpen = false
 }
 document.getElementById('arrow').addEventListener('click', () => {
   if (!accardionOpen) {
-    openAccardion()
+    openAccardion(templates)
   } else {
     closeAcardion()
   }
@@ -24,8 +39,15 @@ Array.from(document.getElementsByClassName('template-type')).forEach(
       const clone = document
         .getElementById('button-template')
         .content.cloneNode(true)
-
+      const button = clone.getElementById('button')
+      button.addEventListener('click', () => {
+        openAccardion(setting)
+      })
+      button.removeAttribute('id')
       document.getElementById('main-layout').prepend(clone)
     })
   }
 )
+document.getElementById('add-new-element').addEventListener('click', () => {
+  openAccardion(templates)
+})
