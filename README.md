@@ -1,6 +1,6 @@
-# Page Builder
+# Vitrin
 
-> This is a simplle page builder template made with tailwind without any other frameworks.
+> This is a clone of [soroush's vitrin](https://vitrin.soroush.app/) with added features done with tailwind and no frameworks.
 
 ## Prerequisites
 
@@ -19,14 +19,8 @@ $ npm install -g pnpm
 Start with cloning this repo on your local machine:
 
 ```sh
-$ git clone https://github.com/Mohaymen-Academy/FE_Team01_Summer1402.git
-$ cd FE_Team01_Summer1402
-```
-
-after that you have to go to the landing folder
-
-```sh
-$ cd project03
+$ git clone https://github.com/mpowend/vitrin.git
+$ cd vitrin
 ```
 
 To install and set up the project, run:
