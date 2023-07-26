@@ -26,13 +26,28 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    semi: 'off',
-    'no-extra-semi': 'error',
-    'no-shadow': 'off',
   },
   settings: {
     'import/resolver': {
       typescript: {},
     },
   },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        semi: 'off',
+        'no-extra-semi': 'error',
+        'no-shadow': 'off',
+        'import/extensions': ['error', 'never'],
+        //enable default in exports
+        'no-restricted-exports': [
+          'error',
+          {
+            restrictedNamedExports: [],
+          },
+        ],
+      },
+    },
+  ],
 }
