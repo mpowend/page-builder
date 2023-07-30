@@ -1,5 +1,5 @@
 export interface element {
-  id: string
+  id: number
   type: string
   settings: object
 }
@@ -17,6 +17,12 @@ export interface button extends element {
     padding: number
     size: string
     width: string
+  }
+}
+
+export interface test extends element {
+  settings: {
+    text: string
   }
 }
 

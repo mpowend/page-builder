@@ -2,6 +2,7 @@ export interface SelectRowProps {
   title: string
   value?: string
   values?: string[]
+  index: number
 }
 
 export default function SelectRow({
