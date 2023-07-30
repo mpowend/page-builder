@@ -37,10 +37,10 @@
 }
 @layer components {
   .template-type {
-    @apply w-full p-2 text-center border border-gray-200 rounded-md;
+    @apply w-full text-center border border-gray-200 rounded-md relative;
   }
   .canvas-button {
-    @apply flex items-center justify-center rounded-md bg-[#ffffff1a];
+    @apply flex items-center justify-center rounded-md bg-[#ffffff1a] relative;
   }
   .page-options-option {
     @apply flex flex-row justify-between;

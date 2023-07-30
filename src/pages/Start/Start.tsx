@@ -15,6 +15,9 @@ import {
   home,
   logo,
 } from '@/assets/icons/'
+import TemplatesWidget from '@/components/TemplatesWidget'
+import Button from '@/components/ui/Button'
+import SettingWidget from '@/components/SettingWidget'
 
 const Start = () => (
   <div className="relative flex h-screen w-full flex-col font-vazir">
@@ -47,21 +50,17 @@ const Start = () => (
         <div className="relative flex h-full grow flex-col items-center justify-center bg-lightpressed max-md:order-3">
           <div className="flex h-[80%] flex-row gap-4">
             <div className="flex flex-col gap-2">
-              <button className="canvas-button">
-                <img src={pencil} />
-              </button>
-              <button className="canvas-button">
-                <img src={arrowup} />
-              </button>
-              <button className="canvas-button">
-                <img src={arrowdown} />
-              </button>
-              <button className="canvas-button">
-                <img src={lock} />
-              </button>
-              <button className="canvas-button">
-                <img src={bin} />
-              </button>
+              {[
+                { text: 'مداد', image: pencil },
+                { text: 'بالا', image: arrowup },
+                { text: 'پایین', image: arrowdown },
+                { text: 'قفل', image: lock },
+                { text: 'حذف', image: bin },
+              ].map(({ text, image }) => (
+                <Button key={text} tooltip={text}>
+                  <img src={image} />
+                </Button>
+              ))}
             </div>
             <div className="flex flex-col gap-3">
               <div
@@ -110,55 +109,29 @@ const Start = () => (
         </div>
         <div
           id="overlay"
-          className="pointer-events-none absolute bottom-0 left-0 flex w-full flex-row justify-between  max-md:translate-y-full max-md:flex-col max-md:justify-end max-md:overflow-y-scroll max-md:pb-6 md:h-full"
+          className="pointer-events-none absolute bottom-0 left-0 flex w-full flex-row justify-between max-md:translate-y-full max-md:flex-col max-md:justify-end max-md:overflow-y-scroll max-md:pb-6 md:h-full"
         >
           <div
             id="left"
             className="rtl pointer-events-auto flex w-[300px] flex-col bg-white shadow-lg max-md:order-2 max-md:hidden max-md:w-full max-md:px-4 md:block md:p-6"
           >
-            <div className="flex h-full flex-col gap-4">
-              <div className="mb-2 font-bold">تنظیمات صفحه</div>
-              <div className="page-options-option">
-                <span className="flex items-center">فاصله بین فریم ها</span>
-                <select className="rounded-md border border-gray-200 p-1 pl-3">
-                  <option value="1">پیش فرض</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                </select>
-              </div>
-              <div className="page-options-option">
-                <span className="flex items-center">حاشیه</span>
-                <input
-                  className="ltr w-8 rounded-md border border-gray-200 p-1 text-center"
-                  type="text"
-                  placeholder="12"
-                />
-              </div>
-              <div className="page-options-option">
-                <span className="flex items-center">فاصله از دیواره</span>
-                <input
-                  className="ltr w-8 rounded-md border border-gray-200 p-1 text-center"
-                  type="text"
-                  placeholder="24"
-                />
-              </div>
-            </div>
+            <SettingWidget element="test" />
           </div>
           <div
             id="right"
             className="rtl pointer-events-auto flex w-[150px] flex-col bg-white p-2 shadow-lg max-md:order-1 max-md:hidden max-md:w-full max-md:p-0 max-md:px-4 max-md:shadow-none md:block"
           >
-            <div className="flex h-full flex-col gap-2">
-              <div className="mb-2 font-bold">قالب ها</div>
-              <button className="template-type">کارت</button>
-              <button className="template-type">دکمه ها</button>
-              <button className="template-type">متن</button>
-              <button className="template-type">عکس</button>
-              <button className="template-type">ویدئو</button>
-              <button className="template-type">اسلایدر</button>
-              <button className="template-type">آیکون</button>
-            </div>
+            <TemplatesWidget
+              options={[
+                'کارت',
+                'دکمه ها',
+                'متن',
+                'عکس',
+                'ویدئو',
+                'اسلایدر',
+                'آیکون',
+              ]}
+            />
           </div>
         </div>
       </div>
