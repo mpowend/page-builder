@@ -18,8 +18,6 @@ export default function TextRow({
   state,
 }: TextRowProps) {
   const data = useSelector(state) as test
-  console.log(data)
-
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -30,7 +28,7 @@ export default function TextRow({
         text: 'عنوان',
       },
     }
-    if (!data) dispatch(addPage(d))
+    if (!data?.settings) dispatch(addPage(d))
   })
   return (
     <div className="flex w-full flex-col gap-2">

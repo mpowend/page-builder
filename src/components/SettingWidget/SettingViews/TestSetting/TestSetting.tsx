@@ -6,7 +6,6 @@ interface TestSettingProps {
 }
 
 export default function TestSetting({ index }: TestSettingProps) {
-  //   const data = JSON.parse(json)
   return (
     <>
       <SettingRow

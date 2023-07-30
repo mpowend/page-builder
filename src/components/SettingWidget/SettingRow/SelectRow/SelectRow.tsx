@@ -14,8 +14,8 @@ export default function SelectRow({
     <div className="page-options-option">
       <span className="flex items-center">{title}</span>
       <select
+        defaultValue={value}
         className="rounded-md border border-gray-200 p-1 pl-3"
-        value={value}
       >
         {values.map(name => (
           <option key={name}>{name}</option>

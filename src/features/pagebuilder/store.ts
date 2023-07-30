@@ -1,5 +1,6 @@
 import { configureStore, createAction, createReducer } from '@reduxjs/toolkit'
-import type { element } from '@/types/pagebuilder'
+import type { page, element } from '@/types/pagebuilder'
+import syncMiddleware from '@/features/pagebuilder/middleware'
 
 // const pagebuilderReducer: Reducer<object[], PayloadAction> = (
 //   state: object[] | undefined,
@@ -25,30 +26,41 @@ import type { element } from '@/types/pagebuilder'
 //   }
 // }
 
-const addPage = createAction('pagebuilder/add', (json: element) => ({
+const addElement = createAction('pagebuilder/add', (json: element) => ({
   payload: json,
 }))
-const removePage = createAction('pagebuilder/remove', (index: number) => ({
+const removeElement = createAction('pagebuilder/remove', (index: number) => ({
   payload: index,
 }))
-const updatePage = createAction(
+
+const updateElement = createAction(
   'pagebuilder/update',
   (index: number, ele: element) => ({
     payload: { index, ele },
   })
 )
 
-const initialState: { elements: element[] } = { elements: [] }
+const initialState: page = {
+  alignH: 'left',
+  alignV: 'top',
+  colSpace: 0,
+  margin: 0,
+  padding: 0,
+  rounded: 0,
+  colCount: 1,
+  elements: [],
+}
 
 const pagebuilderReducer = createReducer(initialState, builder => {
   builder
-    .addCase(addPage, (state, action) => {
-      state.elements.push(action.payload)
+    .addCase(addElement, (state, action) => {
+      if (!state.elements.some(el => el.id == action.payload.id))
+        state.elements.push(action.payload)
     })
-    .addCase(removePage, (state, action) => {
+    .addCase(removeElement, (state, action) => {
       state.elements.splice(action.payload, 1)
     })
-    .addCase(updatePage, (state, action) => {
+    .addCase(updateElement, (state, action) => {
       state.elements[action.payload.index] = action.payload.ele
     })
 })
@@ -58,11 +70,17 @@ const store = configureStore({
     pagebuilder: pagebuilderReducer,
   },
   preloadedState: {
-    pagebuilder: { elements: [] },
+    pagebuilder: initialState,
   },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().prepend(syncMiddleware),
 })
 
 export default store
 export type AppDispatch = typeof store.dispatch
 export type RootState = ReturnType<typeof store.getState>
-export { addPage, removePage, updatePage }
+export {
+  addElement as addPage,
+  removeElement as removePage,
+  updateElement as updatePage,
+}

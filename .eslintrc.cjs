@@ -48,6 +48,7 @@ module.exports = {
           },
         ],
         'no-param-reassign': 'off',
+        eqeqeq: 'off',
       },
     },
   ],
