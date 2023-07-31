@@ -1,8 +1,12 @@
+import { RootState } from '@/features/pagebuilder/store'
+
 export interface element {
   id: number
   type: string
-  settings: object
+  settings: Record<string, number | string>
 }
+
+export type attribute = 'text' | 'select'
 
 export interface button extends element {
   settings: {
@@ -19,10 +23,11 @@ export interface button extends element {
     width: string
   }
 }
-
+export type rootToElementSelector = (state: RootState) => element
 export interface test extends element {
   settings: {
     text: string
+    select: string
   }
 }
 
@@ -35,4 +40,5 @@ export interface page {
   rounded: number
   colCount: number
   elements: element[]
+  activeIndex: number
 }

@@ -9,9 +9,9 @@ interface SettingRowProps {
 export default function SettingRow({ type, data }: SettingRowProps) {
   switch (type) {
     case 'text':
-      return <TextRow {...data} />
+      return <TextRow {...(data as TextRowProps)} />
     case 'select':
-      return <SelectRow {...data} />
+      return <SelectRow {...(data as SelectRowProps)} />
     default:
       return <div>Not implemented</div>
   }

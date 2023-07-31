@@ -1,21 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { addPage, updatePage, RootState } from '@/features/pagebuilder/store'
+import { addPage, updatePage } from '@/features/pagebuilder/store'
 
 import { useEffect } from 'react'
-import { element, test } from '@/types/pagebuilder'
+import { rootToElementSelector, test } from '@/types/pagebuilder'
 
 export interface TextRowProps {
   title: string
   placeholder?: string
-  value?: string
   index: number
-  state(st: RootState): element
+  state: rootToElementSelector
+  propName: keyof test['settings']
 }
 export default function TextRow({
   title,
   placeholder,
   index,
   state,
+  propName,
 }: TextRowProps) {
   const data = useSelector(state) as test
   const dispatch = useDispatch()
@@ -26,6 +27,7 @@ export default function TextRow({
       type: 'text',
       settings: {
         text: 'عنوان',
+        select: '',
       },
     }
     if (!data?.settings) dispatch(addPage(d))
@@ -39,9 +41,7 @@ export default function TextRow({
         placeholder={placeholder}
         value={data ? data.settings.text : ''}
         onChange={e => {
-          dispatch(
-            updatePage(index, { ...data, settings: { text: e.target.value } })
-          )
+          dispatch(updatePage(propName, e.target.value))
         }}
       />
     </div>
