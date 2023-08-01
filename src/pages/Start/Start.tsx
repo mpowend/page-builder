@@ -6,10 +6,6 @@ import {
   arrowdown,
   lock,
   bin,
-  plus,
-  hand,
-  binYellow,
-  pencilYellow,
   upload,
   eye,
   home,
@@ -18,6 +14,7 @@ import {
 import TemplatesWidget from '@/components/TemplatesWidget'
 import Button from '@/components/ui/Button'
 import SettingWidget from '@/components/SettingWidget'
+import PageWidget from '@/components/PageWidget/PageWidget'
 
 const Start = () => (
   <div className="relative flex h-screen w-full flex-col font-vazir">
@@ -62,49 +59,7 @@ const Start = () => (
                 </Button>
               ))}
             </div>
-            <div className="flex flex-col gap-3">
-              <div
-                id="main-layout"
-                className="flex h-[800px] w-[360px] flex-col gap-4 overflow-auto bg-white px-4 py-8"
-              >
-                <div
-                  id="add-new-element"
-                  className="flex h-24 w-full flex-col items-center gap-4 rounded-lg border border-dashed border-blue-500 py-2 font-bold"
-                >
-                  <img src={plus} className="rounded-lg bg-slate-200 p-2" />
-                  <span className="text-sm text-blue-500">
-                    یک قالب را بکشید و رها کنید
-                  </span>
-                </div>
-                <template id="button-template">
-                  <div className="flex flex-col items-end">
-                    <div className="inline-flex h-8 w-24 items-center justify-center gap-3 rounded-t-xl rounded-bl-xl rounded-br-sm border border-orange-200 bg-white px-2">
-                      <div className="relative h-4 w-4">
-                        <img src={hand} />
-                      </div>
-                      <div className="relative h-4 w-4">
-                        <img src={binYellow} />
-                      </div>
-                      <div className="relative h-4 w-4">
-                        <img src={pencilYellow} />
-                      </div>
-                    </div>
-                    <div className="flex h-16 w-full flex-col items-center justify-center rounded-lg rounded-tr-none border border-dashed border-yellow-400 py-2 font-bold">
-                      <button
-                        className="rounded-2xl bg-gray-400 px-8 py-2 text-white"
-                        id="button"
-                      >
-                        دکمه
-                      </button>
-                    </div>
-                  </div>
-                </template>
-              </div>
-
-              <button className="w-full rounded-lg border border-white bg-[#ffffff60] p-2 font-bold text-blue-600">
-                افزودن صفحه
-              </button>
-            </div>
+            <PageWidget />
           </div>
         </div>
         <div
@@ -122,14 +77,23 @@ const Start = () => (
             className="rtl pointer-events-auto flex w-[150px] flex-col bg-white p-2 shadow-lg max-md:order-1 max-md:hidden max-md:w-full max-md:p-0 max-md:px-4 max-md:shadow-none md:block"
           >
             <TemplatesWidget
+              // options={[
+              //   'کارت',
+              //   'دکمه ها',
+              //   'متن',
+              //   'عکس',
+              //   'ویدئو',
+              //   'اسلایدر',
+              //   'آیکون',
+              // ]}
               options={[
-                'کارت',
-                'دکمه ها',
-                'متن',
-                'عکس',
-                'ویدئو',
-                'اسلایدر',
-                'آیکون',
+                { title: 'کارت', type: 'card' },
+                { title: 'دکمه ها', type: 'button' },
+                { title: 'متن', type: 'text' },
+                { title: 'عکس', type: 'image' },
+                { title: 'ویدئو', type: 'video' },
+                { title: 'اسلایدر', type: 'slider' },
+                { title: 'آیکون', type: 'icon' },
               ]}
             />
           </div>
