@@ -1,4 +1,4 @@
-import { updatePage } from '@/features/pagebuilder/store'
+import { updateElement } from '@/features/pagebuilder/store'
 import { rootToElementSelector, test } from '@/types/pagebuilder'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -24,7 +24,7 @@ export default function SelectRow({
       <select
         defaultValue={data?.settings[propName]}
         className="rounded-md border border-gray-200 p-1 pl-3"
-        onChange={e => dispatch(updatePage(propName, e.target.value))}
+        onChange={e => dispatch(updateElement(propName, e.target.value))}
       >
         {values.map(name => (
           <option key={name} value={name}>

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { addPage, updatePage } from '@/features/pagebuilder/store'
+import { addElement, updateElement } from '@/features/pagebuilder/store'
 
 import { useEffect } from 'react'
 import { rootToElementSelector, test } from '@/types/pagebuilder'
@@ -30,7 +30,7 @@ export default function TextRow({
         select: '',
       },
     }
-    if (!data?.settings) dispatch(addPage(d))
+    if (!data?.settings) dispatch(addElement(d))
   })
   return (
     <div className="flex w-full flex-col gap-2">
@@ -41,7 +41,7 @@ export default function TextRow({
         placeholder={placeholder}
         value={data ? data.settings.text : ''}
         onChange={e => {
-          dispatch(updatePage(propName, e.target.value))
+          dispatch(updateElement(propName, e.target.value))
         }}
       />
     </div>

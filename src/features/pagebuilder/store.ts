@@ -45,43 +45,47 @@ const setActiveElement = createAction(
   })
 )
 
-const initialState: page = {
-  alignH: 'left',
-  alignV: 'top',
-  colSpace: 0,
-  margin: 0,
-  padding: 0,
-  rounded: 0,
-  colCount: 1,
-  elements: [],
-  activeIndex: 0,
+const initialState: { pagebuilder: page } = {
+  pagebuilder: {
+    lastID: 0,
+    alignH: 'left',
+    alignV: 'top',
+    colSpace: 0,
+    margin: 0,
+    padding: 0,
+    rounded: 0,
+    colCount: 1,
+    elements: [],
+    activeIndex: 0,
+  },
 }
 
 const pagebuilderReducer = createReducer(initialState, builder => {
   builder
     .addCase(addElement, (state, action) => {
-      if (!state.elements.some(el => el.id == action.payload.id))
-        state.elements.push(action.payload)
+      console.log(action)
+      if (!state.pagebuilder.elements.some(el => el.id == action.payload.id)) {
+        console.log('inside action')
+
+        state.pagebuilder.elements.push(action.payload)
+        state.pagebuilder.lastID += 1
+      }
     })
     .addCase(removeElement, (state, action) => {
-      state.elements.splice(action.payload, 1)
+      state.pagebuilder.elements.splice(action.payload, 1)
     })
     .addCase(updateElement, (state, action) => {
-      state.elements[state.activeIndex].settings[action.payload.index] =
-        action.payload.ele
+      state.pagebuilder.elements[state.pagebuilder.activeIndex].settings[
+        action.payload.index
+      ] = action.payload.ele
     })
     .addCase(setActiveElement, (state, action) => {
-      state.activeIndex = action.payload
+      state.pagebuilder.activeIndex = action.payload
     })
 })
 
 const store = configureStore({
-  reducer: {
-    pagebuilder: pagebuilderReducer,
-  },
-  preloadedState: {
-    pagebuilder: initialState,
-  },
+  reducer: pagebuilderReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().prepend(syncMiddleware),
 })
@@ -89,8 +93,4 @@ const store = configureStore({
 export default store
 export type AppDispatch = typeof store.dispatch
 export type RootState = ReturnType<typeof store.getState>
-export {
-  addElement as addPage,
-  removeElement as removePage,
-  updateElement as updatePage,
-}
+export { addElement, removeElement, updateElement }

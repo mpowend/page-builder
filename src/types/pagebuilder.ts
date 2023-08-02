@@ -8,7 +8,7 @@ export interface element {
 
 export type attribute = 'text' | 'select'
 
-export interface button extends element {
+export interface buttonType extends element {
   settings: {
     text: string
     link: string
@@ -23,6 +23,20 @@ export interface button extends element {
     width: string
   }
 }
+
+export interface textType extends element {
+  settings: {
+    text: string
+    alignH: string
+    alignV: string
+    color: string
+    fontSize: number
+    lineHeight: number
+    margin: number
+    padding: number
+    link: string
+  }
+}
 export type rootToElementSelector = (state: RootState) => element
 export interface test extends element {
   settings: {
@@ -32,6 +46,7 @@ export interface test extends element {
 }
 
 export interface page {
+  lastID: number
   alignH: string
   alignV: string
   colSpace: number
