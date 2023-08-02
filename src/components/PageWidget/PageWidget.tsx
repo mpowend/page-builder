@@ -7,8 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState, addElement } from '@/features/pagebuilder/store'
 import { element, page, textType } from '@/types/pagebuilder'
 import { type } from 'os'
-import TextElement from '../Elements/TextElement'
-import ButtonElement from '../Elements/ButtonElement'
+import GeneralElement from '../Elements/Element'
 
 // interface PageWidgetProps {
 
@@ -133,31 +132,16 @@ export default function PageWidget() {
             یک قالب را بکشید و رها کنید
           </span>
         </div>
-        {state.elements.map(ele => {
-          console.log(ele)
-          switch (ele.type) {
-            case 'text':
-              return (
-                <TextElement
-                  id={state.lastID + 1}
-                  key={state.lastID + 1}
-                  index={state.lastID + 1}
-                  moveCard={() => console.log('movedcard')}
-                />
-              )
-            case 'button':
-              return (
-                <ButtonElement
-                  id={state.lastID + 1}
-                  key={state.lastID + 1}
-                  index={state.lastID + 1}
-                  moveCard={() => console.log('movedcard')}
-                />
-              )
-            default:
-              return 'not implemented'
-          }
+        {state.elements.map(ele => (
+          <GeneralElement
+            type={ele.type}
+            id={state.lastID + 1}
+            key={state.lastID + 1}
+            index={state.lastID + 1}
+            moveCard={() => console.log('movedcard')}
+          />
           // return (
+
           //   <div key={ele.id} id="button-template" ref={ref}>
           //     <div className="flex flex-col items-end">
           //       <div className="inline-flex h-8 w-24 items-center justify-center gap-3 rounded-t-xl rounded-bl-xl rounded-br-sm border border-orange-200 bg-white px-2">
@@ -182,7 +166,7 @@ export default function PageWidget() {
           //     </div>
           //   </div>
           // )
-        })}
+        ))}
         {!!render && render}
       </div>
 

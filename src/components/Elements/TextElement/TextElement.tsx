@@ -8,7 +8,7 @@ interface DragItem {
   index: number
   id: number
 }
-interface TextElementProps extends DragItem {
+export interface TextElementProps extends DragItem {
   className?: string
   moveCard: (dragIndex: number, hoverIndex: number) => void
 }
