@@ -71,22 +71,14 @@ const TextElement = ({ index, moveCard, id, className }: TextElementProps) => {
     },
   })
 
-  const [{ isDragging }, drag] = useDrag({
+  const [, drag] = useDrag({
     type: 'BOX',
     item: () => ({ id, index, type: 'text' }),
-    collect: monitor => ({
-      isDragging: monitor.isDragging(),
-    }),
   })
 
-  const opacity = isDragging ? 0 : 1
   drag(drop(ref))
   return (
-    <div
-      className={classNames('flex flex-col items-end', className)}
-      ref={ref}
-      style={{ opacity }}
-    >
+    <div className={classNames('flex flex-col items-end', className)} ref={ref}>
       <div className="inline-flex h-8 w-24 items-center justify-center gap-3 rounded-t-xl rounded-bl-xl rounded-br-sm border border-orange-200 bg-white px-2">
         <div className="relative h-4 w-4">
           <img src={hand} />

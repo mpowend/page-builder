@@ -85,6 +85,8 @@ const ButtonElement = ({
   })
 
   drag(drop(ref))
+
+  console.log(id)
   return (
     <div className={classNames('flex flex-col items-end', className)}>
       <div className="inline-flex h-8 w-24 items-center justify-center gap-3 rounded-t-xl rounded-bl-xl rounded-br-sm border border-orange-200 bg-white px-2">

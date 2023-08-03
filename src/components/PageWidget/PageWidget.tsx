@@ -1,12 +1,10 @@
-import { plus, hand, binYellow, pencilYellow } from '@/assets/icons/'
-import { ReactElement, useRef, useState } from 'react'
+import { plus } from '@/assets/icons/'
+import { ReactElement, useState } from 'react'
 import { useDrop } from 'react-dnd'
-import { Identifier, XYCoord } from 'dnd-core'
-import classNames from 'classnames'
+import { Identifier } from 'dnd-core'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, addElement } from '@/features/pagebuilder/store'
-import { element, page, textType } from '@/types/pagebuilder'
-import { type } from 'os'
+import { buttonType, page, textType } from '@/types/pagebuilder'
 import GeneralElement from '../Elements/Element'
 
 // interface PageWidgetProps {
@@ -19,30 +17,30 @@ interface DragItem {
 }
 export default function PageWidget() {
   const [render, setRender] = useState(null as ReactElement | null)
-  const ref = useRef<HTMLDivElement>(null)
   const state = useSelector<RootState>(
     (state: RootState) => state.pagebuilder
   ) as page
   const dispatch = useDispatch()
   // console.log('state', state)
 
-  const [{ isHovering }, drop] = useDrop<
+  const [{ isOver }, drop] = useDrop<
     DragItem,
     void,
-    { handlerId: Identifier | null; isHovering: boolean }
+    { handlerId: Identifier | null; isOver: boolean }
   >({
     accept: 'BOX',
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
-        isHovering: monitor.isOver(),
+        isOver: monitor.isOver(),
       }
     },
-    hover(item: DragItem, monitor) {
+    hover(item: DragItem) {
       switch (item.type) {
         case 'text':
           setRender(
-            <TextElement
+            <GeneralElement
+              type="text"
               index={0}
               id={0}
               moveCard={() => {
@@ -54,7 +52,8 @@ export default function PageWidget() {
           break
         case 'button':
           setRender(
-            <ButtonElement
+            <GeneralElement
+              type="button"
               index={0}
               id={0}
               moveCard={() => {
@@ -68,7 +67,7 @@ export default function PageWidget() {
           setRender(null)
       }
     },
-    drop(item, monitor) {
+    drop(item) {
       // console.log(item)
 
       setRender(null)
@@ -97,16 +96,18 @@ export default function PageWidget() {
             type: 'button',
             settings: {
               text: 'دکمه',
+              link: '',
               alignH: 'center',
               alignV: 'center',
               color: '#000000',
-              fontSize: 16,
-              lineHeight: 1.5,
+              bgColor: '#ffffff',
+              rounded: 0,
               margin: 0,
               padding: 0,
-              link: '',
+              size: 'md',
+              width: '100',
             },
-          }
+          } as buttonType
           break
         default:
           break
@@ -123,15 +124,6 @@ export default function PageWidget() {
         id="main-layout"
         className="flex h-[800px] w-[360px] flex-col gap-4 overflow-auto bg-white px-4 py-8"
       >
-        <div
-          id="add-new-element"
-          className="flex h-24 w-full flex-col items-center gap-4 rounded-lg border border-dashed border-blue-500 py-2 font-bold"
-        >
-          <img src={plus} className="rounded-lg bg-slate-200 p-2" />
-          <span className="text-sm text-blue-500">
-            یک قالب را بکشید و رها کنید
-          </span>
-        </div>
         {state.elements.map(ele => (
           <GeneralElement
             type={ele.type}
@@ -167,7 +159,16 @@ export default function PageWidget() {
           //   </div>
           // )
         ))}
-        {!!render && render}
+        {isOver && !!render && render}
+        <div
+          id="add-new-element"
+          className="flex h-24 w-full flex-col items-center gap-4 rounded-lg border border-dashed border-blue-500 py-2 font-bold"
+        >
+          <img src={plus} className="rounded-lg bg-slate-200 p-2" />
+          <span className="text-sm text-blue-500">
+            یک قالب را بکشید و رها کنید
+          </span>
+        </div>
       </div>
 
       <button className="w-full rounded-lg border border-white bg-[#ffffff60] p-2 font-bold text-blue-600">

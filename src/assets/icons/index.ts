@@ -13,6 +13,12 @@ import plus from './plus.svg'
 import redo from './redo.svg'
 import undo from './undo.svg'
 import upload from './upload.svg'
+import aligncenter from './alignCenter.svg'
+import alignright from './alignright.svg'
+import alignleft from './alignleft.svg'
+import alignvertical from './alignvertical.svg'
+import alignlinear from './alignlinear.svg'
+import alignbottom from './alignbottom.svg'
 
 export {
   upload,
@@ -30,4 +36,10 @@ export {
   binYellow,
   arrowup,
   arrowdown,
+  aligncenter,
+  alignleft,
+  alignright,
+  alignlinear,
+  alignvertical,
+  alignbottom,
 }

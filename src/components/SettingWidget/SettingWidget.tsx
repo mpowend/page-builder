@@ -1,7 +1,7 @@
 import TestSetting from './SettingViews/TestSetting/TestSetting'
 
 interface SettingWidgetProps {
-  element: 'test'
+  element: 'test' | 'button'
 }
 
 export default function SettingWidget({ element }: SettingWidgetProps) {

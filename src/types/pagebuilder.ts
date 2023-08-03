@@ -1,13 +1,20 @@
 import { RootState } from '@/features/pagebuilder/store'
 
+export type attribute = 'text' | 'select' | 'alignH' | 'alignV'
+export type elementType =
+  | 'text'
+  | 'button'
+  | 'card'
+  | 'picture'
+  | 'video'
+  | 'slider'
+  | 'icon'
+
 export interface element {
   id: number
-  type: string
+  type: elementType
   settings: Record<string, number | string>
 }
-
-export type attribute = 'text' | 'select'
-
 export interface buttonType extends element {
   settings: {
     text: string

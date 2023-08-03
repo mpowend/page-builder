@@ -34,8 +34,8 @@ const removeElement = createAction('pagebuilder/remove', (index: number) => ({
 
 const updateElement = createAction(
   'pagebuilder/update',
-  (index: attribute, ele: string | number) => ({
-    payload: { index, ele },
+  (attrib: attribute, ele: string | number) => ({
+    payload: { index: attrib, ele },
   })
 )
 const setActiveElement = createAction(

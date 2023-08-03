@@ -10,6 +10,7 @@ export interface TextRowProps {
   index: number
   state: rootToElementSelector
   propName: keyof test['settings']
+  lines?: number
 }
 export default function TextRow({
   title,
@@ -17,6 +18,7 @@ export default function TextRow({
   index,
   state,
   propName,
+  lines,
 }: TextRowProps) {
   const data = useSelector(state) as test
   const dispatch = useDispatch()
@@ -35,9 +37,9 @@ export default function TextRow({
   return (
     <div className="flex w-full flex-col gap-2">
       <div className="rtl w-full p-2">{title}</div>
-      <input
-        type="text"
+      <textarea
         className="ltr w-full rounded-md border border-gray-200 p-1"
+        rows={lines ?? 1}
         placeholder={placeholder}
         value={data ? data.settings.text : ''}
         onChange={e => {

@@ -1,19 +1,17 @@
-import ButtonElement, {
-  ButtonElementProps,
-} from './ButtonElement/ButtonElement'
-import TextElement, { TextElementProps } from './TextElement/TextElement'
+import { elementType } from '@/types/pagebuilder'
+import ButtonElement, { ButtonElementProps } from './ButtonElement'
+import TextElement, { TextElementProps } from './TextElement'
 
-interface ElementRowProps {
-  type: 'text' | 'button' | 'card' | 'picture' | 'video' | 'slider' | 'icon'
-  data: TextElementProps | ButtonElementProps
+interface ElementRowProps extends TextElementProps, ButtonElementProps {
+  type: elementType
 }
 
-function GeneralElement({ type, data }: ElementRowProps) {
+function GeneralElement({ type, ...data }: ElementRowProps) {
   switch (type) {
     case 'text':
-      return <TextElement {...(data as TextElementProps)} />
+      return <TextElement {...data} />
     case 'button':
-      return <ButtonElement {...(data as ButtonElementProps)} />
+      return <ButtonElement {...data} />
     default:
       return <div>Not implemented</div>
   }

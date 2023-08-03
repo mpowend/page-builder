@@ -15,6 +15,14 @@ export default function TestSetting({ index }: TestSettingProps) {
   return (
     <>
       <SettingRow
+        type="align"
+        data={{
+          index,
+          hStateSelector: state,
+          vStateSelector: state,
+        }}
+      />
+      <SettingRow
         type="text"
         data={{
           index,
