@@ -3,6 +3,7 @@ import { addElement, updateElement } from '@/features/pagebuilder/store'
 
 import { useEffect } from 'react'
 import { rootToElementSelector, test } from '@/types/pagebuilder'
+import classNames from 'classnames'
 
 export interface TextRowProps {
   title: string
@@ -38,8 +39,16 @@ export default function TextRow({
     <div className="flex w-full flex-col gap-2">
       <div className="rtl w-full p-2">{title}</div>
       <textarea
-        className="ltr w-full rounded-md border border-gray-200 p-1"
+        className={classNames(
+          'ltr w-full rounded-md border border-gray-200 p-1',
+          lines && 'whitespace-nowrap overflow-x-scroll'
+        )}
         rows={lines ?? 1}
+        onInput={e => {
+          ;(e.target as HTMLInputElement).value = (
+            e.target as HTMLInputElement
+          ).value.replace(/\n/g, '')
+        }}
         placeholder={placeholder}
         value={data ? data.settings.text : ''}
         onChange={e => {
