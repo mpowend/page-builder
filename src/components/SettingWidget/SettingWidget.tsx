@@ -11,7 +11,7 @@ export default function SettingWidget({ element }: SettingWidgetProps) {
       {(() => {
         switch (element) {
           case 'test':
-            return <TestSetting json={element} index={0} />
+            return <TestSetting />
           default:
             return <div>not found</div>
         }

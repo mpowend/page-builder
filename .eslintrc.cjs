@@ -37,6 +37,7 @@ module.exports = {
       files: ['*.ts', '*.tsx'],
       rules: {
         semi: 'off',
+        '@typescript-eslint/semi': ['error', 'never'],
         'no-extra-semi': 'error',
         'no-shadow': 'off',
         'import/extensions': ['error', 'never'],

@@ -2,49 +2,6 @@ import { configureStore, createAction, createReducer } from '@reduxjs/toolkit'
 import type { page, element, attribute } from '@/types/pagebuilder'
 import syncMiddleware from '@/features/pagebuilder/middleware'
 
-// const pagebuilderReducer: Reducer<object[], PayloadAction> = (
-//   state: object[] | undefined,
-//   action: { type: string; payload: void }
-// ) => {
-//   switch (action.type) {
-//     case 'pagebuilder/add':
-//       return [...state, action.payload]
-//     case 'pagebuilder/remove':
-//       return state.filter((item, index) => index !== action.payload.index)
-//     case 'pagebuilder/update':
-//       return state.map((item, index) => {
-//         if (index === action.payload.index) {
-//           return {
-//             ...item,
-//             ...action.payload,
-//           }
-//         }
-//         return item
-//       })
-//     default:
-//       return state
-//   }
-// }
-const addElement = createAction('pagebuilder/add', (json: element) => ({
-  payload: json,
-}))
-const removeElement = createAction('pagebuilder/remove', (index: number) => ({
-  payload: index,
-}))
-
-const updateElement = createAction(
-  'pagebuilder/update',
-  (attrib: attribute, ele: string | number) => ({
-    payload: { index: attrib, ele },
-  })
-)
-const setActiveElement = createAction(
-  'pagebuilder/setActive',
-  (index: number) => ({
-    payload: index,
-  })
-)
-
 const initialState: { pagebuilder: page } = {
   pagebuilder: {
     lastID: 0,
@@ -59,6 +16,38 @@ const initialState: { pagebuilder: page } = {
     activeIndex: 0,
   },
 }
+const addElement = createAction('pagebuilder/add', (json: element) => ({
+  payload: json,
+}))
+const removeElement = createAction('pagebuilder/remove', (index: number) => ({
+  payload: index,
+}))
+
+const updateElement = createAction(
+  'pagebuilder/update',
+  (attrib: attribute, ele: string | number) => ({
+    payload: { index: attrib, ele },
+  })
+)
+
+const setActiveElement = createAction(
+  'pagebuilder/setActive',
+  (index: number) => ({
+    payload: index,
+  })
+)
+const updateElementOff = createAction(
+  'pagebuilder/updateElementOff',
+  (attrib: attribute, ele: string | number) => ({
+    payload: { index: attrib, ele },
+  })
+)
+const load = createAction(
+  'pagebuilder/load',
+  (json: { pagebuilder: page }) => ({
+    payload: json,
+  })
+)
 
 const pagebuilderReducer = createReducer(initialState, builder => {
   builder
@@ -72,7 +61,11 @@ const pagebuilderReducer = createReducer(initialState, builder => {
       }
     })
     .addCase(removeElement, (state, action) => {
-      state.pagebuilder.elements.splice(action.payload, 1)
+      state.pagebuilder.elements.forEach((el, index) => {
+        if (el.id === action.payload) {
+          state.pagebuilder.elements.splice(index, 1)
+        }
+      })
     })
     .addCase(updateElement, (state, action) => {
       state.pagebuilder.elements[state.pagebuilder.activeIndex].settings[
@@ -81,6 +74,15 @@ const pagebuilderReducer = createReducer(initialState, builder => {
     })
     .addCase(setActiveElement, (state, action) => {
       state.pagebuilder.activeIndex = action.payload
+    })
+    .addCase(updateElementOff, (state, action) => {
+      state.pagebuilder.elements[state.pagebuilder.activeIndex].settings[
+        action.payload.index
+      ] = action.payload.ele
+    })
+    .addCase(load, (state, action) => {
+      console.log(action.payload)
+      state.pagebuilder = action.payload.pagebuilder
     })
 })
 
@@ -93,4 +95,11 @@ const store = configureStore({
 export default store
 export type AppDispatch = typeof store.dispatch
 export type RootState = ReturnType<typeof store.getState>
-export { addElement, removeElement, updateElement }
+export {
+  addElement,
+  removeElement,
+  updateElement,
+  setActiveElement,
+  updateElementOff,
+  load,
+}

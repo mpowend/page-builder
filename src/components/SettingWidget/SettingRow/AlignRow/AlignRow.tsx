@@ -22,7 +22,9 @@ function AlignRow({ hStateSelector, vStateSelector }: AlignRowProps) {
   const v = ((vstate as element)?.settings.alignV as string) || ''
   const h = ((hstate as element)?.settings.alignH as string) || ''
   const calculateBorder = (dir: string, alignment: string) =>
-    alignment == dir ? 'border-2 p-1 rounded' : 'p-1 rounded'
+    alignment == dir
+      ? 'border-2 border-gray-400 p-1 rounded transition-300'
+      : 'border-2 border-transparent border p-1 rounded transition-300'
 
   const dispatch = useDispatch()
 

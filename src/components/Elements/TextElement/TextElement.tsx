@@ -1,8 +1,11 @@
 import { hand, binYellow, pencilYellow } from '@/assets/icons/'
+import { removeElement, setActiveElement } from '@/features/pagebuilder/store'
+import { element, textType } from '@/types/pagebuilder'
 import classNames from 'classnames'
 import { Identifier, XYCoord } from 'dnd-core'
 import { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
+import { useDispatch } from 'react-redux'
 
 interface DragItem {
   index: number
@@ -11,9 +14,18 @@ interface DragItem {
 export interface TextElementProps extends DragItem {
   className?: string
   moveCard: (dragIndex: number, hoverIndex: number) => void
+  element: element
 }
-const TextElement = ({ index, moveCard, id, className }: TextElementProps) => {
+const TextElement = ({
+  index,
+  moveCard,
+  id,
+  className,
+  element,
+}: TextElementProps) => {
+  element = element as textType
   const ref = useRef<HTMLDivElement>(null)
+  const dispatch = useDispatch()
   const [, drop] = useDrop<DragItem, void, { handlerId: Identifier | null }>({
     accept: 'BOX',
     // collect(monitor) {
@@ -83,15 +95,29 @@ const TextElement = ({ index, moveCard, id, className }: TextElementProps) => {
         <div className="relative h-4 w-4">
           <img src={hand} />
         </div>
-        <div className="relative h-4 w-4">
+        <div
+          className="relative h-4 w-4"
+          onClick={() => {
+            dispatch(removeElement(index))
+          }}
+        >
           <img src={binYellow} />
         </div>
-        <div className="relative h-4 w-4">
+        <div
+          className="relative h-4 w-4"
+          onClick={() => {
+            dispatch(setActiveElement(index))
+          }}
+        >
           <img src={pencilYellow} />
         </div>
       </div>
       <div className="flex h-28 w-full flex-col items-center justify-center rounded-lg rounded-tr-none border border-dashed border-yellow-400 p-1 font-bold">
-        <textarea className="rtl h-full w-full text-gray-600 focus:outline-none" />
+        <textarea
+          disabled
+          className="rtl h-full w-full resize-none text-gray-600 focus:outline-none"
+          value={element.settings.text}
+        />
       </div>
     </div>
   )

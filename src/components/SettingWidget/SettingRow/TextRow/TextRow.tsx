@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { addElement, updateElement } from '@/features/pagebuilder/store'
+import { updateElement } from '@/features/pagebuilder/store'
 
-import { useEffect } from 'react'
 import { rootToElementSelector, test } from '@/types/pagebuilder'
 import classNames from 'classnames'
 
@@ -16,7 +15,6 @@ export interface TextRowProps {
 export default function TextRow({
   title,
   placeholder,
-  index,
   state,
   propName,
   lines,
@@ -24,17 +22,17 @@ export default function TextRow({
   const data = useSelector(state) as test
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    const d: test = {
-      id: index,
-      type: 'text',
-      settings: {
-        text: 'عنوان',
-        select: '',
-      },
-    }
-    if (!data?.settings) dispatch(addElement(d))
-  })
+  // useEffect(() => {
+  //   const d: test = {
+  //     id: index,
+  //     type: 'text',
+  //     settings: {
+  //       text: 'عنوان',
+  //       select: '',
+  //     },
+  //   }
+  //   if (!data?.settings) dispatch(addElement(d))
+  // })
   return (
     <div className="flex w-full flex-col gap-2">
       <div className="rtl w-full p-2">{title}</div>
@@ -45,7 +43,7 @@ export default function TextRow({
         )}
         rows={lines ?? 1}
         onInput={e => {
-          ;(e.target as HTMLInputElement).value = (
+          (e.target as HTMLInputElement).value = (
             e.target as HTMLInputElement
           ).value.replace(/\n/g, '')
         }}

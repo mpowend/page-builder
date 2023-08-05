@@ -11,7 +11,7 @@ export default function DraggableButton({
 }: DraggableButtonProps) {
   const [, drag, dragPreview] = useDrag(() => ({
     // "type" is required. It is used by the "accept" specification of drop targets.
-    type: 'BOX',
+    type: 'template-button',
     item: () => ({ type }),
     // The collect function utilizes a "monitor" instance (see the Overview for what this is)
     // to pull important pieces of state from the DnD system.

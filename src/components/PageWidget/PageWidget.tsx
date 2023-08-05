@@ -28,7 +28,7 @@ export default function PageWidget() {
     void,
     { handlerId: Identifier | null; isOver: boolean }
   >({
-    accept: 'BOX',
+    accept: 'template-button',
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
@@ -47,6 +47,21 @@ export default function PageWidget() {
                 console.log('card move')
               }}
               className="opacity-50"
+              element={{
+                id: 0,
+                type: 'text',
+                settings: {
+                  text: 'متن',
+                  alignH: 'center',
+                  alignV: 'center',
+                  color: '#000000',
+                  fontSize: 16,
+                  lineHeight: 1.5,
+                  margin: 0,
+                  padding: 0,
+                  link: '',
+                },
+              }}
             />
           )
           break
@@ -60,6 +75,23 @@ export default function PageWidget() {
                 console.log('card move')
               }}
               className="opacity-50"
+              element={{
+                id: 0,
+                type: 'button',
+                settings: {
+                  text: 'دکمه',
+                  link: '',
+                  alignH: 'center',
+                  alignV: 'center',
+                  color: '#000000',
+                  bgColor: '#ffffff',
+                  rounded: 0,
+                  margin: 0,
+                  padding: 0,
+                  size: 'md',
+                  width: '100',
+                },
+              }}
             />
           )
           break
@@ -75,7 +107,7 @@ export default function PageWidget() {
       switch (item.type) {
         case 'text':
           element = {
-            id: state.elements.length + 1,
+            id: state.elements.length,
             type: 'text',
             settings: {
               text: 'متن',
@@ -92,7 +124,7 @@ export default function PageWidget() {
           break
         case 'button':
           element = {
-            id: state.elements.length + 1,
+            id: state.elements.length,
             type: 'button',
             settings: {
               text: 'دکمه',
@@ -127,10 +159,11 @@ export default function PageWidget() {
         {state.elements.map(ele => (
           <GeneralElement
             type={ele.type}
-            id={state.lastID + 1}
-            key={state.lastID + 1}
-            index={state.lastID + 1}
+            id={ele.id}
+            key={ele.id}
+            index={ele.id}
             moveCard={() => console.log('movedcard')}
+            element={ele}
           />
           // return (
 

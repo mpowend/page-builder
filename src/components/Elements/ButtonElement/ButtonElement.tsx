@@ -1,8 +1,11 @@
 import { hand, binYellow, pencilYellow } from '@/assets/icons/'
+import { removeElement, setActiveElement } from '@/features/pagebuilder/store'
+import { buttonType, element } from '@/types/pagebuilder'
 import classNames from 'classnames'
 import { Identifier, XYCoord } from 'dnd-core'
 import { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
+import { useDispatch } from 'react-redux'
 
 interface DragItem {
   index: number
@@ -11,14 +14,19 @@ interface DragItem {
 export interface ButtonElementProps extends DragItem {
   className?: string
   moveCard: (dragIndex: number, hoverIndex: number) => void
+  element: element
 }
 const ButtonElement = ({
   index,
   moveCard,
   id,
   className,
+  element,
 }: ButtonElementProps) => {
+  element = element as buttonType
   const ref = useRef<HTMLDivElement>(null)
+  const dispatch = useDispatch()
+
   const [, drop] = useDrop<DragItem, void, { handlerId: Identifier | null }>({
     accept: 'BOX',
     // collect(monitor) {
@@ -76,7 +84,7 @@ const ButtonElement = ({
     },
   })
 
-  const [{ isDragging }, drag] = useDrag({
+  const [, drag] = useDrag({
     type: 'BOX',
     item: () => ({ id, index, type: 'button' }),
     collect: monitor => ({
@@ -86,17 +94,26 @@ const ButtonElement = ({
 
   drag(drop(ref))
 
-  console.log(id)
   return (
     <div className={classNames('flex flex-col items-end', className)}>
       <div className="inline-flex h-8 w-24 items-center justify-center gap-3 rounded-t-xl rounded-bl-xl rounded-br-sm border border-orange-200 bg-white px-2">
         <div className="relative h-4 w-4">
           <img src={hand} />
         </div>
-        <div className="relative h-4 w-4">
+        <div
+          className="relative h-4 w-4"
+          onClick={() => {
+            dispatch(removeElement(index))
+          }}
+        >
           <img src={binYellow} />
         </div>
-        <div className="relative h-4 w-4">
+        <div
+          className="relative h-4 w-4"
+          onClick={() => {
+            dispatch(setActiveElement(index))
+          }}
+        >
           <img src={pencilYellow} />
         </div>
       </div>
@@ -105,7 +122,7 @@ const ButtonElement = ({
           className="rounded-2xl bg-gray-400 px-8 py-2 text-white"
           id="button"
         >
-          دکمه
+          {element.settings.text}
         </button>
       </div>
     </div>
