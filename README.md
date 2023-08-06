@@ -1,6 +1,14 @@
-# Vitrin
+# page builder
 
-> This is a clone of [soroush's vitrin](https://vitrin.soroush.app/) with added features done with tailwind and no frameworks.
+> This is a page builder with added features done with tailwind and react.
+
+## Running with docker
+
+if you want to run the project with docker, you can simply go to ./docker/docker-development and run the following command:
+
+```sh
+$ docker-compose up --build
+```
 
 ## Prerequisites
 
