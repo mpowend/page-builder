@@ -10,6 +10,8 @@ if you want to run the project with docker, you can simply go to ./docker/docker
 $ docker-compose up --build
 ```
 
+after that you can access the page on http://localhost:5173
+
 ## Prerequisites
 
 This project requires NodeJS (version 8 or later), NPM and PNPM.
