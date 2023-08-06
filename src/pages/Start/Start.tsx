@@ -24,7 +24,7 @@ const Start = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     axios
-      .get('http://localhost:3001/page')
+      .get('http://localhost:5174/page')
       .then((res: AxiosResponse<RootState>) => {
         console.log(res)
         dispatch(load(res.data))

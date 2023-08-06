@@ -12,7 +12,7 @@ const syncMiddleware: Middleware =
       action.type == 'pagebuilder/add' ||
       action.type == 'pagebuilder/remove'
     )
-      axios.post('http://localhost:3001/page', state).catch(err => {
+      axios.post('http://localhost:5174/page', state).catch(err => {
         console.error(err)
       })
     return result

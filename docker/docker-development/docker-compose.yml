@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ../../
+      dockerfile: ./docker/docker-development/Dockerfile.dev
+
+    ports:
+      - '5173:3000'
+
+    volumes:
+      - /app/node_modules
+      - ../../:/app
+  json-server:
+    restart: always
+    build:
+      context: ../../json-server
+      dockerfile: Dockerfile
+    command: node server.js
+    ports:
+      - '5174:3001'
