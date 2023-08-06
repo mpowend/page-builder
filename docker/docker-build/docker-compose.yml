@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: ../../
+      dockerfile: docker/docker-build/Dockerfile.build
+    ports:
+      - '8080:80'
+  json-server:
+    restart: always
+    build:
+      context: ../../json-server
+      dockerfile: Dockerfile
+    command: npm server.js

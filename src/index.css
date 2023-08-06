@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'IRANSans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/fonts/IRANSans.ttf');
+}
+@font-face {
+  font-family: 'vazir';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/fonts/Vazir-Regular.ttf');
+}
+
+@layer utilities {
+  .transition-300 {
+    transition-property: background-color, border-color, color, fill, stroke,
+      opacity, box-shadow, transform;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .transition-500 {
+    transition-property: background-color, border-color, color, fill, stroke,
+      opacity, box-shadow, transform;
+    transition-duration: 500ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .rtl {
+    direction: rtl;
+  }
+  .ltr {
+    direction: ltr;
+  }
+}
+@layer components {
+  .template-type {
+    @apply w-full text-center border border-gray-200 rounded-md relative;
+  }
+  .canvas-button {
+    @apply flex items-center justify-center rounded-md bg-[#ffffff1a] relative;
+  }
+  .page-options-option {
+    @apply flex flex-row justify-between;
+  }
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
